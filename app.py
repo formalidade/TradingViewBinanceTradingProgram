@@ -35,7 +35,7 @@ def update_env_variable(key, value, env_path=".env"):
 
     with open(env_path, "w") as file:
         file.writelines(lines)
-def order(side, quantity, symbol,order_type=ORDER_TYPE_MARKET):
+def order(side, quantity, symbol,order_type= ORDER_TYPE_MARKET):
     try:
         print("sending order")
         order = client.create_order(symbol=symbol, side=side, type=order_type, quantity=quantity) # side is BUY or SELL , type is LIMIT or MARKET 
@@ -109,7 +109,7 @@ def webhook():
         price_to_sell_at = Decimal(str(data['strategy']['order_price']))
         quantity_to_sell = prev_position_size  
         order_size=Decimal(str(price_to_sell_at * quantity_to_sell )) 
-        #|uncomment if u want to really buy |order_response = order(side , quantity_sold, 'BTCUSDT')
+        #|uncomment if u want to really buy |order_response = order(side , quantity_to_sell, 'BTCUSDT')
         profit = order_size - amount_bought if order_size > 0 else 0 
         capital = capital + order_size # profit may be negitive 
         prev_position_size -= quantity_to_sell
